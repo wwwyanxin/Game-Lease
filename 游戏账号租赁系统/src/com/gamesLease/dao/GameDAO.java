@@ -1,0 +1,88 @@
+package com.gamesLease.dao;
+
+import com.gamesLease.bean.Game;
+import com.gamesLease.db.DBUtil;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by wyx11 on 2017-5-16.
+ */
+public class GameDAO {
+    public Game getGame(String name) {
+        Game result=null;
+        try{
+            Connection conn = new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from game where name = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result=null;
+                result.setId(rs.getInt("id"));
+                result.setName(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Game> queryGame() {
+        List<Game> result=null;
+        try {
+            Connection conn = new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from game ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            result=new ArrayList<>();
+            Game game=null;
+            while (rs.next()) {
+                game=new Game();
+                game.setId(rs.getInt("id"));
+                game.setName(rs.getString("name"));
+                result.add(game);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Game> queryGame(String name) {//模糊查找
+        List<Game> result=null;
+        try {
+            Connection conn = new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from game like %?% ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+
+            Game game=null;
+            while (rs.next()) {
+                game=new Game();
+                game.setId(rs.getInt("id"));
+                game.setName(rs.getString("name"));
+                result.add(game);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+}
