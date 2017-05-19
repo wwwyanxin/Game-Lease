@@ -101,6 +101,8 @@ public class UserInfoServlet extends HttpServlet {
                 }
             }
             //response.sendRedirect("/WEB-INF/userInfo.jsp?leaseMapList="+leaseMapList+"&rentMapList="+rentMapList);
+            request.setAttribute("leaseMapList",leaseMapList);
+            request.setAttribute("rentMapList",rentMapList);
             request.getRequestDispatcher("/WEB-INF/userInfo.jsp").forward(request, response);
             //response.sendRedirect("/WEB-INF/userInfo.jsp");
 //            response.sendRedirect("/WEB-INF/userInfo.jsp?leaseOrderList="

@@ -27,6 +27,7 @@ public class UserDAO {
                 result.setId(rs.getInt("id"));
                 result.setName(rs.getString("name"));
                 result.setPassword(rs.getString("password"));
+                result.setBalance(rs.getDouble("balance"));
             }
             ps.close();
             conn.close();
@@ -50,6 +51,8 @@ public class UserDAO {
                 result.setId(rs.getInt("id"));
                 result.setName(rs.getString("name"));
                 result.setPassword(rs.getString("password"));
+                result.setBalance(rs.getDouble("balance"));
+
             }
             ps.close();
             conn.close();
@@ -74,6 +77,8 @@ public class UserDAO {
                 result.setId(rs.getInt("id"));
                 result.setName(rs.getString("name"));
                 result.setPassword(rs.getString("password"));
+                result.setBalance(rs.getDouble("balance"));
+
             }
             ps.close();
             conn.close();

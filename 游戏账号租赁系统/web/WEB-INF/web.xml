@@ -15,6 +15,14 @@
         <servlet-name>UserInfoServlet</servlet-name>
         <servlet-class>com.gamesLease.servlet.UserInfoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LeaseServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.LeaseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LeaseServlet</servlet-name>
+        <url-pattern>/lease</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserInfoServlet</servlet-name>
         <url-pattern>/userinfo</url-pattern>

@@ -13,54 +13,61 @@
 </head>
 <body>
 <h1 align="center">${user.name}</h1><br>
-<p align="center">账户余额:${user.balance} </p> &nbsp<<a href="/WEB-INF/recharge.jsp">充值</a>
+<p align="center">账户余额:${user.balance} &nbsp<a href="/WEB-INF/recharge.jsp">充值</a></p>
 
 <h2>账号出租单:</h2>
-<table align="center" border="1" cellspacing="0"></table>
+
 <c:forEach items="${leaseMapList}" var="leaseMap" varStatus="st">
-    <tr>
-        <td>game</td>
-        <td>account-info</td>
-        <td>start</td>
-        <td>end</td>
-        <td>price</td>
-        <td>status</td>
-    </tr>
-    <tr>
-        <td>${leaseMap.game}</td>
-        <td>账号:${leaseMap.account}<br> 密码:${leaseMap.password}</td>
-        <td>${leaseMap.start}</td>
-        <td>${leaseMap.end}</td>
-        <td>${leaseMap.price}</td>
-        <td>${leaseMap.status}</td>
-    </tr>
-    <tr>
-        <td>description</td>
-        <td colspan="5">${leaseMap.description}</td>
-    </tr>
+    <table align="center" border="1" cellspacing="0">
+        <tr>
+            <td>game</td>
+            <td>account-info</td>
+            <td>start</td>
+            <td>end</td>
+            <td>price</td>
+            <td>status</td>
+        </tr>
+        <tr>
+            <td>${leaseMap.game}</td>
+            <td>账号:${leaseMap.account}<br> 密码:${leaseMap.password}</td>
+            <td>${leaseMap.start}</td>
+            <td>${leaseMap.end}</td>
+            <td>${leaseMap.price}</td>
+            <td>${leaseMap.status}</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td colspan="5">${leaseMap.description}</td>
+        </tr>
+    </table>
+    <br>
 </c:forEach>
 
+
 <h2>账号租赁单:</h2>
-<table align="center" border="1" cellspacing="0"></table>
 <c:forEach items="${rentMapList}" var="rentMap" varStatus="st">
-    <tr>
-        <td>game</td>
-        <td>account-info</td>
-        <td>start</td>
-        <td>end</td>
-        <td>lease-user</td>
-        <td>price</td>
-        <td>status</td>
-    </tr>
-    <tr>
-        <td>${rentMap.name}</td>
-        <td>账号:${rentMap.account}<br> 密码:${rentMap.password}</td>
-        <td>${rentMap.start}</td>
-        <td>${rentMap.end}</td>
-        <td>${rentMap.leaseUser}</td>
-        <td>${rentMap.price}</td>
-        <td>${rentMap.cost}</td>
-    </tr>
+    <table align="center" border="1" cellspacing="0">
+        <tr>
+            <td>game</td>
+            <td>account-info</td>
+            <td>start</td>
+            <td>end</td>
+            <td>lease-user</td>
+            <td>price</td>
+            <td>status</td>
+        </tr>
+        <tr>
+            <td>${rentMap.game}</td>
+            <td>账号:${rentMap.account}<br> 密码:${rentMap.password}</td>
+            <td>${rentMap.start}</td>
+            <td>${rentMap.end}</td>
+            <td>${rentMap.leaseUser}</td>
+            <td>${rentMap.price}</td>
+            <td>${rentMap.cost}</td>
+        </tr>
+    </table>
+    <br>
 </c:forEach>
+
 </body>
 </html>
