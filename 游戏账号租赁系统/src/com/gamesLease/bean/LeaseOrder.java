@@ -7,12 +7,21 @@ import java.util.Date;
  */
 public class LeaseOrder {
     private Integer id;
+    private Integer uid;
     private Integer accountId;
     private Date start;
     private Date end;
     private Double price;
     private Integer status;
     private String description;
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
 
     public Integer getStatus() {
         return status;

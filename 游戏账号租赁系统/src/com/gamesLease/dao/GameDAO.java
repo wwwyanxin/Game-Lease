@@ -36,6 +36,28 @@ public class GameDAO {
         return result;
     }
 
+    public Game getGameById(Integer id) {
+        Game result=null;
+        try{
+            Connection conn = new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from game where id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result=new Game();
+                result.setId(rs.getInt("id"));
+                result.setName(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public List<Game> queryGame() {
         List<Game> result=null;
         try {

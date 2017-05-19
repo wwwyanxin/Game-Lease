@@ -24,6 +24,7 @@ public class LeaseOrderDAO {
             if (rs.next()) {
                 result=new LeaseOrder();
                 result.setId(rs.getInt("id"));
+                result.setUid(rs.getInt("uid"));
                 result.setAccountId(rs.getInt("account_id"));
                 result.setStart(rs.getDate("start"));
                 result.setEnd(rs.getDate("end"));
@@ -43,12 +44,14 @@ public class LeaseOrderDAO {
         try{
             Connection conn=new DBUtil().getConncetion();
             String sql = "" +
-                    "insert into lease_order (account_id,end,price,description) values(?,?,?,?)";
+                    "insert into lease_order (uid,account_id,end,price,description) values(?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, leaseOrder.getAccountId());
-            ps.setDate(2, (Date)leaseOrder.getEnd());
-            ps.setDouble(3, leaseOrder.getPrice());
-            ps.setString(4,leaseOrder.getDescription());
+
+            ps.setInt(1,leaseOrder.getUid());
+            ps.setInt(2, leaseOrder.getAccountId());
+            ps.setDate(3, (Date)leaseOrder.getEnd());
+            ps.setDouble(4, leaseOrder.getPrice());
+            ps.setString(5,leaseOrder.getDescription());
 
             ResultSet rs=ps.getGeneratedKeys();
             if (rs.next()) {
@@ -101,6 +104,7 @@ public class LeaseOrderDAO {
                 leaseOrder=new LeaseOrder();
 
                 leaseOrder.setId(rs.getInt("id"));
+                leaseOrder.setUid(rs.getInt("uid"));
                 leaseOrder.setAccountId(rs.getInt("account_id"));
                 leaseOrder.setStart(rs.getDate("start"));
                 leaseOrder.setEnd(rs.getDate("end"));
@@ -115,6 +119,35 @@ public class LeaseOrderDAO {
         }
         return result;
     }
+    public List<LeaseOrder> queryLeaseOrderByUid(Integer uid) {
+        List<LeaseOrder> result=null;
+        try{
+            Connection conn=new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from lease_order where uid=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,uid);
+            ResultSet rs=ps.executeQuery();
+            result=new ArrayList<>();
+            LeaseOrder leaseOrder=null;
+            while (rs.next()) {
+                leaseOrder=new LeaseOrder();
 
+                leaseOrder.setId(rs.getInt("id"));
+                leaseOrder.setUid(rs.getInt("uid"));
+                leaseOrder.setAccountId(rs.getInt("account_id"));
+                leaseOrder.setStart(rs.getDate("start"));
+                leaseOrder.setEnd(rs.getDate("end"));
+                leaseOrder.setStatus(rs.getInt("status"));
+                leaseOrder.setPrice(rs.getDouble("price"));
+                leaseOrder.setDescription(rs.getString("description"));
+
+                result.add(leaseOrder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 }

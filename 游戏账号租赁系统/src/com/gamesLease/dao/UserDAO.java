@@ -59,6 +59,30 @@ public class UserDAO {
         return result;
     }
 
+    public User getUserById(Integer id) {
+        User result=null;
+        try {
+            Connection conn = new DBUtil().getConncetion();
+            String sql = "" +
+                    " select * from USER where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result=new User();
+                result.setId(rs.getInt("id"));
+                result.setName(rs.getString("name"));
+                result.setPassword(rs.getString("password"));
+            }
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public boolean addUser(User user) {
         try {
             Connection conn = new DBUtil().getConncetion();
