@@ -13,7 +13,8 @@
         body{text-align:right}.div{
             margin:0 auto;
             width:180px;height:120px;
-            border:4px  solid #C0C0C0
+            border:4px  solid #C0C0C0;
+            background-color: cadetblue;
                                }
     </style>
 </head>

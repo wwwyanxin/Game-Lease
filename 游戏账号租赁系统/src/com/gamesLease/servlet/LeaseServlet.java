@@ -15,6 +15,6 @@ public class LeaseServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+       request.getRequestDispatcher("/WEB-INF/leaseForm.jsp").forward(request, response);
     }
 }
