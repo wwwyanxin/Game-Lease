@@ -100,11 +100,36 @@ public class UserDAO {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 user.setId(rs.getInt("id"));
+
+                ps.close();
+                conn.close();
                 return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
+    }
+
+    public boolean updateUser(User user) {
+        try {
+            Connection conn = new DBUtil().getConncetion();
+            String sql = "" +
+                    "update user set name=?,password=?,balance=? where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getPassword());
+            ps.setDouble(3,user.getBalance());
+            ps.setInt(4, user.getId());
+
+            ps.execute();
+            ps.close();
+            conn.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 }

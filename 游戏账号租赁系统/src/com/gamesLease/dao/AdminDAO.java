@@ -29,6 +29,8 @@ public class AdminDAO {
                 result.setName(rs.getString("name"));
                 result.setPassword(rs.getString("password"));
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {

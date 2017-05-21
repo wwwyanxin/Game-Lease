@@ -23,7 +23,7 @@ public class UserLoginServlet extends HttpServlet {
             response.sendRedirect("login.jsp");
         } else {
             request.getSession().setAttribute("user", user);
-            request.getRequestDispatcher("/WEB-INF/menu.jsp").forward(request, response);
+            request.getRequestDispatcher("menu.jsp").forward(request, response);
         }
     }
 

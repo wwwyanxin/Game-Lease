@@ -32,6 +32,8 @@ public class LeaseOrderDAO {
                 result.setStatus(rs.getInt("status"));
                 result.setDescription(rs.getString("description"));
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -49,15 +51,18 @@ public class LeaseOrderDAO {
 
             ps.setInt(1,leaseOrder.getUid());
             ps.setInt(2, leaseOrder.getAccountId());
-            ps.setDate(3, (Date)leaseOrder.getEnd());
+            ps.setDate(3, (Date) leaseOrder.getEnd());
             ps.setDouble(4, leaseOrder.getPrice());
             ps.setString(5,leaseOrder.getDescription());
 
+            ps.execute();
             ResultSet rs=ps.getGeneratedKeys();
             if (rs.next()) {
                 leaseOrder.setId(rs.getInt("id"));
                 return true;
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -82,6 +87,8 @@ public class LeaseOrderDAO {
             ps.setInt(5,leaseOrder.getId());
 
             ps.execute();
+            ps.close();
+            conn.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,6 +121,8 @@ public class LeaseOrderDAO {
 
                 result.add(leaseOrder);
             }
+            ps.close();
+            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -144,6 +153,8 @@ public class LeaseOrderDAO {
 
                 result.add(leaseOrder);
             }
+            ps.close();
+            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

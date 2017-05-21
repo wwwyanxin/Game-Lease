@@ -97,11 +97,16 @@ public class AccountInfoDAO {
             ps.setString(2, accountInfo.getPassword());
             ps.setInt(3, accountInfo.getGameId());
 
+            ps.execute();
             ResultSet rs=ps.getGeneratedKeys();
             if (rs.next()) {
-                accountInfo.setId(rs.getInt("id"));
+                accountInfo.setId(rs.getInt(1));
+
+                ps.close();
+                conn.close();
                 return true;
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {

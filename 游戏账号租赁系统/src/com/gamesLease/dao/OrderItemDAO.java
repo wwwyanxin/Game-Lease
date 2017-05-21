@@ -23,9 +23,12 @@ public class OrderItemDAO {
             ps.setDate(4, (Date) orderItem.getEnd());
             ps.setDouble(5,orderItem.getCost());
 
+            ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 orderItem.setId(rs.getInt("id"));
+                ps.close();
+                conn.close();
                 return true;
             }
         } catch (Exception e) {
@@ -56,6 +59,8 @@ public class OrderItemDAO {
 
                 result.add(orderItem);
             }
+            ps.close();
+            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,6 +87,8 @@ public class OrderItemDAO {
                 result.setEnd(rs.getDate("end"));
                 result.setCost(rs.getDouble("cost"));
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {

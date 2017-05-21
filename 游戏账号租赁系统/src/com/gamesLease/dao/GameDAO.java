@@ -28,6 +28,8 @@ public class GameDAO {
                 result.setId(rs.getInt("id"));
                 result.setName(rs.getString("name"));
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -50,6 +52,8 @@ public class GameDAO {
                 result.setId(rs.getInt("id"));
                 result.setName(rs.getString("name"));
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -75,6 +79,8 @@ public class GameDAO {
                 game.setName(rs.getString("name"));
                 result.add(game);
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -100,6 +106,8 @@ public class GameDAO {
                 game.setName(rs.getString("name"));
                 result.add(game);
             }
+            ps.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {

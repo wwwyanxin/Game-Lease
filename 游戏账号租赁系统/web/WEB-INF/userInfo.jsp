@@ -12,8 +12,14 @@
     <title>用户信息</title>
 </head>
 <body>
+
+<p>
+    <a href="menu.jsp">返回到主页</a>&nbsp;
+    <a href="login.jsp">退出登录</a>
+</p>
+
 <h1 align="center">${user.name}</h1><br>
-<p align="center">账户余额:${user.balance} &nbsp<a href="/WEB-INF/recharge.jsp">充值</a></p>
+<p align="center">账户余额:${user.balance} &nbsp<a href="recharge">充值</a></p>
 
 <h2>账号出租单:</h2>
 
@@ -46,7 +52,7 @@
 
 <h2>账号租赁单:</h2>
 <c:forEach items="${rentMapList}" var="rentMap" varStatus="st">
-    <table align="center" border="1" cellspacing="1" bgcolor="#fff8dc" >
+    <table align="center" border="1" cellspacing="1" bgcolor="#fff8dc">
         <tr>
             <td>game</td>
             <td>account-info</td>

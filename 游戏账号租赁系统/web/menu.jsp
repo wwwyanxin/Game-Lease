@@ -11,6 +11,9 @@
     <title>菜单功能</title>
 </head>
 <body>
+<p>
+    <a href="login.jsp">退出登录</a>
+</p>
 <h1 align="center">Hi,${user.name}</h1>
 <p align="center">请选择功能</p>
 <table align="center" border="1" cellpadding="10" bgcolor="#fff8dc">

@@ -19,6 +19,14 @@
         <servlet-name>LeaseServlet</servlet-name>
         <servlet-class>com.gamesLease.servlet.LeaseServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RechargeServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.RechargeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RechargeServlet</servlet-name>
+        <url-pattern>/recharge</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LeaseServlet</servlet-name>
         <url-pattern>/lease</url-pattern>
