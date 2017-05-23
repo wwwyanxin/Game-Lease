@@ -22,8 +22,8 @@
 <h1 align="center">欢迎使用游戏账号租赁平台!</h1>
 <div class="div">
     <form action="login" method="post">
-        账号:<input type="text" name="name"><br>
-        密码:<input type="password" name="password">
+        账号:<input type="text" name="name" required><br>
+        密码:<input type="password" name="password" required>
         <input type="submit" value="登录">
     </form>
 

@@ -3,6 +3,28 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+    <context-param>
+        <param-name>审核未通过</param-name>
+        <param-value>-2</param-value>
+    </context-param>
+    <context-param>
+        <param-name>已下架</param-name>
+        <param-value>-1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>审核中</param-name>
+        <param-value>0</param-value>
+    </context-param>
+    <context-param>
+        <param-name>可租用</param-name>
+        <param-value>1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>已被租</param-name>
+        <param-value>2</param-value>
+    </context-param>
+
     <servlet>
         <servlet-name>UserLoginServlet</servlet-name>
         <servlet-class>com.gamesLease.servlet.UserLoginServlet</servlet-class>

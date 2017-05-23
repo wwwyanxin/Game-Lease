@@ -21,8 +21,8 @@
 <body>
 <div class="div">
     <form action="register" method="post">
-        账号:<input type="text" name="name" value="请输入申请的账号:"><br>
-        密码:<input type="password" name="password" value="密码长度为6-18位">
+        账号:<input type="text" name="name" value="请输入申请的账号:" required><br>
+        密码:<input type="password" name="password" value="密码长度为6-18位" required>
         <input type="submit" value="注册">
     </form>
 </div>

@@ -32,10 +32,6 @@ public class LeaseServlet extends HttpServlet {
         String password = request.getParameter("password");
         Double price = Double.valueOf(request.getParameter("price"));
         String description = request.getParameter("description");
-        if (null == account || null == password || price < 0) {
-            request.getRequestDispatcher("/WEB-INF/inputError.jsp");
-        }
-
         //Calendar类比Date更安全
         Calendar calendar=Calendar.getInstance();
         try {
@@ -45,6 +41,10 @@ public class LeaseServlet extends HttpServlet {
         }
         Date end = calendar.getTime();
         User user = (User) request.getSession().getAttribute("user");
+
+        if (0 == account.length() || 0 == password.length()||price<0) {
+            request.getRequestDispatcher("/WEB-INF/inputError.jsp");
+        }
 
 
         CreateLease createLease=new CreateLease();

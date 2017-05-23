@@ -31,20 +31,20 @@
                 </select>
             </td>
             <td>
-                价格(元/小时):<input type="text" name="price">
+                价格(元/小时):<input type="number" name="price" value="0" min="0" required>
             </td>
         </tr>
         <tr>
             <td>
-                账号:<input type="text" value="在此输入账号" name="account">
+                账号:<input type="text" value="在此输入账号" name="account" required>
             </td>
             <td>
-                密码:<input type="password" name="password">
+                密码:<input type="password" name="password" required>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                请填写账号下架收回时间:<input type="datetime-local" name="end"/>
+                请填写账号下架收回时间:<input type="datetime-local" name="end" required/>
             </td>
         </tr>
         <br>

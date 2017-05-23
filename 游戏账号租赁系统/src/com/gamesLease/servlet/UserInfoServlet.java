@@ -2,6 +2,7 @@ package com.gamesLease.servlet;
 
 import com.gamesLease.bean.*;
 import com.gamesLease.dao.*;
+import com.gamesLease.service.StatusEnum;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,15 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wyx11 on 2017-5-19.
  */
 public class UserInfoServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -66,13 +65,23 @@ public class UserInfoServlet extends HttpServlet {
                     String start = dateFormat.format(leaseOrder.getStart());
                     String end = dateFormat.format(leaseOrder.getEnd());
 
+                    Enumeration statusParams=this.getServletContext().getInitParameterNames();//获得初始化参数的名字
+                    String statusName=null;
+                    while (statusParams.hasMoreElements()) {
+                        statusName= (String) statusParams.nextElement();//遍历名字
+                        Integer statusValue = Integer.valueOf(getServletContext().getInitParameter(statusName));//得到这个名字所等于的值
+                        if (statusValue == leaseOrder.getStatus()) {
+                            break;
+                        }
+                    }
+
                     leaseMap.put("game", game.getName());
                     leaseMap.put("account", accountInfo.getAccount());
                     leaseMap.put("password", accountInfo.getPassword());
                     leaseMap.put("start", start);
                     leaseMap.put("end", end);
                     leaseMap.put("price", leaseOrder.getPrice());
-                    leaseMap.put("status", leaseOrder.getStatus());
+                    leaseMap.put("status", statusName);
                     leaseMap.put("description", leaseOrder.getDescription());
 
                     leaseMapList.add(leaseMap);
@@ -81,6 +90,7 @@ public class UserInfoServlet extends HttpServlet {
             if(null!=orderItemList) {
                 for (OrderItem orderItem : orderItemList) {
                     Map<String, Object> rentMap = new HashMap<>();
+
                     LeaseOrder leaseOrder = leaseOrderDAO.getLeaseOrderByAccountId(orderItem.getLeaseId());
                     AccountInfo accountInfo = accountInfoDAO.getAccountInfoById(leaseOrder.getAccountId());
                     Game game = gameDAO.getGameById(accountInfo.getGameId());
