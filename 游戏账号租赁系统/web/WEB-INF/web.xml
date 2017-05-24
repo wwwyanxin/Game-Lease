@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+<!--
     <context-param>
         <param-name>审核未通过</param-name>
         <param-value>-2</param-value>
@@ -24,6 +25,7 @@
         <param-name>已被租</param-name>
         <param-value>2</param-value>
     </context-param>
+-->
 
     <servlet>
         <servlet-name>UserLoginServlet</servlet-name>
@@ -45,6 +47,38 @@
         <servlet-name>RechargeServlet</servlet-name>
         <servlet-class>com.gamesLease.servlet.RechargeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.AdminLoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminSeeLeaseServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.AdminSeeLeaseServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminSeeOrderServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.AdminSeeOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAuditServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.AdminAuditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminAuditServlet</servlet-name>
+        <url-pattern>/adminAudit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSeeOrderServlet</servlet-name>
+        <url-pattern>/adminSeeOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSeeLeaseServlet</servlet-name>
+        <url-pattern>/adminSeeLease</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminLoginServlet</servlet-name>
+        <url-pattern>/adminLogin</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RechargeServlet</servlet-name>
         <url-pattern>/recharge</url-pattern>

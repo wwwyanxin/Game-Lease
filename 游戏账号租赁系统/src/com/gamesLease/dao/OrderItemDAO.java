@@ -68,6 +68,36 @@ public class OrderItemDAO {
         return result;
     }
 
+    public List<OrderItem> queryOrderItem() {
+        List<OrderItem> result=null;
+        try{
+            Connection conn=new DBUtil().getConncetion();
+            String sql = "select * from orderitem ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ResultSet rs=ps.executeQuery();
+            result = new ArrayList<>();
+            OrderItem orderItem=null;
+            while (rs.next()) {
+                orderItem=new OrderItem();
+                orderItem.setId(rs.getInt("id"));
+                orderItem.setLeaseId(rs.getInt("lease_id"));
+                orderItem.setUid(rs.getInt("uid"));
+                orderItem.setStart(rs.getDate("start"));
+                orderItem.setEnd(rs.getDate("end"));
+                orderItem.setCost(rs.getDouble("cost"));
+
+                result.add(orderItem);
+            }
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     public OrderItem getOrderItem(Integer id) {
         OrderItem result=null;
         try{

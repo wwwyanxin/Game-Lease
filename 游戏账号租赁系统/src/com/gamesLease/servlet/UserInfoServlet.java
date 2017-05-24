@@ -1,16 +1,15 @@
 package com.gamesLease.servlet;
 
 import com.gamesLease.bean.*;
-import com.gamesLease.dao.*;
-import com.gamesLease.service.StatusEnum;
+import com.gamesLease.service.UserInfoService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wyx11 on 2017-5-19.
@@ -24,29 +23,11 @@ public class UserInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User)request.getSession().getAttribute("user");
         if (null != user) {
-            LeaseOrderDAO leaseOrderDAO=new LeaseOrderDAO();//获得出租表单
+            /*LeaseOrderDAO leaseOrderDAO=new LeaseOrderDAO();//获得出租表单
             List<LeaseOrder> leaseOrderList = leaseOrderDAO.queryLeaseOrderByUid(user.getId());
 
             OrderItemDAO orderItemDAO=new OrderItemDAO();//获得租入表单
             List<OrderItem> orderItemList = orderItemDAO.queryOrderItemByUid(user.getId());
-
-/*            //遍历lease查找所对应的account
-            List<AccountInfo> accountInfoList = new ArrayList<>();
-            AccountInfoDAO accountInfoDAO=new AccountInfoDAO();
-            AccountInfo accountInfo=null;
-            for (LeaseOrder leaseOrder : leaseOrderList) {
-                accountInfo = accountInfoDAO.getAccountInfoById(leaseOrder.getAccountId());
-                accountInfoList.add(accountInfo);
-            }
-
-            //遍历account查找所对应的game
-            List<Game> gameList = new ArrayList<>();
-            GameDAO gameDAO=new GameDAO();
-            Game game=null;
-            for (AccountInfo account : accountInfoList) {
-                game = gameDAO.getGameById(account.getGameId());
-                gameList.add(game);
-            }*/
 
 
             List<Map<String,Object>> leaseMapList=new ArrayList<>();//出租单
@@ -109,14 +90,13 @@ public class UserInfoServlet extends HttpServlet {
 
                     rentMapList.add(rentMap);
                 }
-            }
-            //response.sendRedirect("/WEB-INF/userInfo.jsp?leaseMapList="+leaseMapList+"&rentMapList="+rentMapList);
+            }*/
+            List<Map<String,Object>> leaseMapList=new UserInfoService().getLeaseMapList(user);
+            List<Map<String,Object>> rentMapList=new UserInfoService().getRentMapList(user);
+
             request.setAttribute("leaseMapList",leaseMapList);
             request.setAttribute("rentMapList",rentMapList);
             request.getRequestDispatcher("/WEB-INF/userInfo.jsp").forward(request, response);
-            //response.sendRedirect("/WEB-INF/userInfo.jsp");
-//            response.sendRedirect("/WEB-INF/userInfo.jsp?leaseOrderList="
-//                    + leaseOrderList + "&orderItemList=" + orderItemList+"&accountInfoList="+accountInfoList+"&gameList="+gameList);
         }
     }
 }

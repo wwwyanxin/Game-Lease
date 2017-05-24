@@ -3,7 +3,7 @@ package com.gamesLease.servlet;
 import com.gamesLease.bean.Game;
 import com.gamesLease.bean.User;
 import com.gamesLease.dao.GameDAO;
-import com.gamesLease.service.CreateLease;
+import com.gamesLease.service.CreateLeaseService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -47,8 +47,8 @@ public class LeaseServlet extends HttpServlet {
         }
 
 
-        CreateLease createLease=new CreateLease();
-        createLease.create(user.getId(),gameId,account,password,end,price,description);
+        CreateLeaseService createLeaseService =new CreateLeaseService();
+        createLeaseService.create(user.getId(),gameId,account,password,end,price,description);
 
         response.sendRedirect("userinfo");
     }

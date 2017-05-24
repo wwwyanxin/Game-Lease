@@ -42,6 +42,37 @@ public class LeaseOrderDAO {
         return result;
     }
 
+    public LeaseOrder getLeaseOrderById(Integer id) {
+        LeaseOrder result=null;
+        try {
+            Connection conn = new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from lease_order where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs=ps.executeQuery();
+            if (rs.next()) {
+                result=new LeaseOrder();
+                result.setId(rs.getInt("id"));
+                result.setUid(rs.getInt("uid"));
+                result.setAccountId(rs.getInt("account_id"));
+                result.setStart(rs.getDate("start"));
+                result.setEnd(rs.getDate("end"));
+                result.setPrice(rs.getDouble("price"));
+                result.setStatus(rs.getInt("status"));
+                result.setDescription(rs.getString("description"));
+            }
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public boolean addLeaseOrder(LeaseOrder leaseOrder) {
         try{
             Connection conn=new DBUtil().getConncetion();
@@ -161,4 +192,36 @@ public class LeaseOrderDAO {
         return result;
     }
 
+    public List<LeaseOrder> queryLeaseOrderByStatus(Integer status) {
+        List<LeaseOrder> result=null;
+        try{
+            Connection conn=new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from lease_order where status=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,status);
+            ResultSet rs=ps.executeQuery();
+            result=new ArrayList<>();
+            LeaseOrder leaseOrder=null;
+            while (rs.next()) {
+                leaseOrder=new LeaseOrder();
+
+                leaseOrder.setId(rs.getInt("id"));
+                leaseOrder.setUid(rs.getInt("uid"));
+                leaseOrder.setAccountId(rs.getInt("account_id"));
+                leaseOrder.setStart(rs.getDate("start"));
+                leaseOrder.setEnd(rs.getDate("end"));
+                leaseOrder.setStatus(rs.getInt("status"));
+                leaseOrder.setPrice(rs.getDouble("price"));
+                leaseOrder.setDescription(rs.getString("description"));
+
+                result.add(leaseOrder);
+            }
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

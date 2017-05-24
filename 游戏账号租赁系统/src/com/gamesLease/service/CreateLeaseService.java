@@ -13,14 +13,14 @@ import java.util.Date;
 /**
  * Created by wyx11 on 2017-5-21.
  */
-public class CreateLease {
+public class CreateLeaseService {
     AccountInfoDAO accountInfoDAO;
     AccountInfo accountInfo;
     LeaseOrderDAO leaseOrderDAO;
     LeaseOrder leaseOrder;
     UserDAO userDAO;
 
-    public CreateLease() {
+    public CreateLeaseService() {
         accountInfoDAO=new AccountInfoDAO();
         accountInfo=new AccountInfo();
         leaseOrderDAO=new LeaseOrderDAO();
