@@ -63,6 +63,14 @@
         <servlet-name>AdminAuditServlet</servlet-name>
         <servlet-class>com.gamesLease.servlet.AdminAuditServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RentListServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.RentListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RentListServlet</servlet-name>
+        <url-pattern>rentList</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAuditServlet</servlet-name>
         <url-pattern>/adminAudit</url-pattern>

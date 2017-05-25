@@ -19,7 +19,7 @@
 <table align="center" border="1" cellpadding="10" bgcolor="#fff8dc">
     <td><a href="userinfo">用户信息</a></td>
     <td><a href="lease">我要出租账号!</a></td>
-    <td><a href="rent">我要租入账号!</a> </td>
+    <td><a href="rentList">我要租入账号!</a> </td>
 </table>
 </body>
 </html>
