@@ -33,7 +33,7 @@ public class CreateLeaseService {
         accountInfo.setPassword(password);
         accountInfoDAO.addAccountInfo(accountInfo);//insert account-info
 
-        end = new java.sql.Date(end.getTime());//将util.Date转换为sql.Date
+        //end = new java.sql.Date(end.getTime());//将util.Date转换为sql.Date
         leaseOrder.setUid(uid);
         leaseOrder.setAccountId(accountInfo.getId());
         leaseOrder.setEnd(end);

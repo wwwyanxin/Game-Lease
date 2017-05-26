@@ -19,8 +19,9 @@ public class OrderItemDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, orderItem.getLeaseId());
             ps.setInt(2, orderItem.getUid());
-            ps.setDate(3, (Date) orderItem.getStart());
-            ps.setDate(4, (Date) orderItem.getEnd());
+            ps.setTimestamp(3, new Timestamp(orderItem.getStart().getTime()));
+            ps.setTimestamp(4, new Timestamp(orderItem.getEnd().getTime()));
+
             ps.setDouble(5,orderItem.getCost());
 
             ps.execute();
@@ -53,8 +54,8 @@ public class OrderItemDAO {
                 orderItem.setId(rs.getInt("id"));
                 orderItem.setLeaseId(rs.getInt("lease_id"));
                 orderItem.setId(rs.getInt("uid"));
-                orderItem.setStart(rs.getDate("start"));
-                orderItem.setEnd(rs.getDate("end"));
+                orderItem.setStart(rs.getTimestamp("start"));
+                orderItem.setEnd(rs.getTimestamp("end"));
                 orderItem.setCost(rs.getDouble("cost"));
 
                 result.add(orderItem);
@@ -83,8 +84,8 @@ public class OrderItemDAO {
                 orderItem.setId(rs.getInt("id"));
                 orderItem.setLeaseId(rs.getInt("lease_id"));
                 orderItem.setUid(rs.getInt("uid"));
-                orderItem.setStart(rs.getDate("start"));
-                orderItem.setEnd(rs.getDate("end"));
+                orderItem.setStart(rs.getTimestamp("start"));
+                orderItem.setEnd(rs.getTimestamp("end"));
                 orderItem.setCost(rs.getDouble("cost"));
 
                 result.add(orderItem);
@@ -113,8 +114,8 @@ public class OrderItemDAO {
                 result.setId(rs.getInt("id"));
                 result.setLeaseId(rs.getInt("lease_id"));
                 result.setUid(rs.getInt("uid"));
-                result.setStart(rs.getDate("start"));
-                result.setEnd(rs.getDate("end"));
+                result.setStart(rs.getTimestamp("start"));
+                result.setEnd(rs.getTimestamp("end"));
                 result.setCost(rs.getDouble("cost"));
             }
             ps.close();

@@ -78,7 +78,7 @@ public class LeaseOrderService {
 
         List<LeaseOrder> leaseOrderList = null;
         leaseOrderList = leaseOrderDAO.queryLeaseOrderByDescription(description, sta);//根据描述查找
-        if (!"all".equals(gid)&&0!=leaseOrderList.size()) {
+        if (!"all".equals(gid) && 0 != leaseOrderList.size()) {
             //根据游戏id过滤
             Iterator<LeaseOrder> iterator = leaseOrderList.iterator();//遍历链表,挑出符合游戏id和出租单
             while (iterator.hasNext()) {
@@ -159,4 +159,35 @@ public class LeaseOrderService {
         }
         return leaseInfoMapList;
     }
+
+    public Map<String, Object> getLeaseInfoMap(Integer leaseId) {
+        AccountInfoDAO accountInfoDAO = new AccountInfoDAO();
+        GameDAO gameDAO = new GameDAO();
+        LeaseOrderDAO leaseOrderDAO = new LeaseOrderDAO();
+        UserDAO userDAO = new UserDAO();
+
+        LeaseOrder leaseOrder = leaseOrderDAO.getLeaseOrderById(leaseId);
+
+        Map<String, Object> leaseInfoMap = new HashMap<>();
+        User user = userDAO.getUserById(leaseOrder.getUid());
+        AccountInfo accountInfo = accountInfoDAO.getAccountInfoById(leaseOrder.getAccountId());
+        Game game = gameDAO.getGameById(accountInfo.getGameId());
+
+        String start = dateFormat.format(leaseOrder.getStart());
+        String end = dateFormat.format(leaseOrder.getEnd());
+
+
+        leaseInfoMap.put("user", user.getName());
+        leaseInfoMap.put("leaseId", leaseOrder.getId());
+        leaseInfoMap.put("game", game.getName());
+        leaseInfoMap.put("account", accountInfo.getAccount());
+        leaseInfoMap.put("password", accountInfo.getPassword());
+        leaseInfoMap.put("start", start);
+        leaseInfoMap.put("end", end);
+        leaseInfoMap.put("price", leaseOrder.getPrice());
+        leaseInfoMap.put("status", status.get(leaseOrder.getStatus()));
+        leaseInfoMap.put("description", leaseOrder.getDescription());
+
+        return leaseInfoMap;
+}
 }

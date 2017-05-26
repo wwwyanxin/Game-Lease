@@ -59,7 +59,7 @@
         <tr>
             <form action="cart" method="post">
                 <td colspan="6" align="right">
-                    <input type="hidden" name="leaseId" value="leaseMap.leaseId">
+                    <input type="hidden" name="leaseId" value="${leaseMap.leaseId}">
                     <input type="submit" value="租赁" style="background-color: #deb858;height: 25px;width: 65px">
                 </td>
             </form>

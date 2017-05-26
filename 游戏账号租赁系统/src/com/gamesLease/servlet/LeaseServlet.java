@@ -35,7 +35,8 @@ public class LeaseServlet extends HttpServlet {
         //Calendar类比Date更安全
         Calendar calendar=Calendar.getInstance();
         try {
-            calendar.setTime(dateFormat.parse(request.getParameter("end")));
+            Date end=dateFormat.parse(request.getParameter("end"));
+            calendar.setTime(end);
         } catch (ParseException e) {
             e.printStackTrace();
         }

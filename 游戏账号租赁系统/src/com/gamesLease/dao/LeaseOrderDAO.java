@@ -26,8 +26,8 @@ public class LeaseOrderDAO {
                 result.setId(rs.getInt("id"));
                 result.setUid(rs.getInt("uid"));
                 result.setAccountId(rs.getInt("account_id"));
-                result.setStart(rs.getDate("start"));
-                result.setEnd(rs.getDate("end"));
+                result.setStart(rs.getTimestamp("start"));
+                result.setEnd(rs.getTimestamp("end"));
                 result.setPrice(rs.getDouble("price"));
                 result.setStatus(rs.getInt("status"));
                 result.setDescription(rs.getString("description"));
@@ -57,8 +57,8 @@ public class LeaseOrderDAO {
                 result.setId(rs.getInt("id"));
                 result.setUid(rs.getInt("uid"));
                 result.setAccountId(rs.getInt("account_id"));
-                result.setStart(rs.getDate("start"));
-                result.setEnd(rs.getDate("end"));
+                result.setStart(rs.getTimestamp("start"));
+                result.setEnd(rs.getTimestamp("end"));
                 result.setPrice(rs.getDouble("price"));
                 result.setStatus(rs.getInt("status"));
                 result.setDescription(rs.getString("description"));
@@ -82,7 +82,9 @@ public class LeaseOrderDAO {
 
             ps.setInt(1,leaseOrder.getUid());
             ps.setInt(2, leaseOrder.getAccountId());
-            ps.setDate(3, (Date) leaseOrder.getEnd());
+//            ps.setDate(3, (Date) leaseOrder.getEnd());
+//            ps.setDate(3, new Date(leaseOrder.getEnd().getTime()));
+            ps.setTimestamp(3, new Timestamp(leaseOrder.getEnd().getTime()));
             ps.setDouble(4, leaseOrder.getPrice());
             ps.setString(5,leaseOrder.getDescription());
 
@@ -111,7 +113,7 @@ public class LeaseOrderDAO {
                     "set end=?,price=?,status=?,description=? " +
                     "where id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setDate(1, (Date) leaseOrder.getEnd());
+            ps.setTimestamp(1, new Timestamp(leaseOrder.getEnd().getTime()));
             ps.setDouble(2, leaseOrder.getPrice());
             ps.setInt(3, leaseOrder.getStatus());
             ps.setString(4, leaseOrder.getDescription());
@@ -144,8 +146,8 @@ public class LeaseOrderDAO {
                 leaseOrder.setId(rs.getInt("id"));
                 leaseOrder.setUid(rs.getInt("uid"));
                 leaseOrder.setAccountId(rs.getInt("account_id"));
-                leaseOrder.setStart(rs.getDate("start"));
-                leaseOrder.setEnd(rs.getDate("end"));
+                leaseOrder.setStart(rs.getTimestamp("start"));
+                leaseOrder.setEnd(rs.getTimestamp("end"));
                 leaseOrder.setStatus(rs.getInt("status"));
                 leaseOrder.setPrice(rs.getDouble("price"));
                 leaseOrder.setDescription(rs.getString("description"));
@@ -176,8 +178,8 @@ public class LeaseOrderDAO {
                 leaseOrder.setId(rs.getInt("id"));
                 leaseOrder.setUid(rs.getInt("uid"));
                 leaseOrder.setAccountId(rs.getInt("account_id"));
-                leaseOrder.setStart(rs.getDate("start"));
-                leaseOrder.setEnd(rs.getDate("end"));
+                leaseOrder.setStart(rs.getTimestamp("start"));
+                leaseOrder.setEnd(rs.getTimestamp("end"));
                 leaseOrder.setStatus(rs.getInt("status"));
                 leaseOrder.setPrice(rs.getDouble("price"));
                 leaseOrder.setDescription(rs.getString("description"));
@@ -209,8 +211,8 @@ public class LeaseOrderDAO {
                 leaseOrder.setId(rs.getInt("id"));
                 leaseOrder.setUid(rs.getInt("uid"));
                 leaseOrder.setAccountId(rs.getInt("account_id"));
-                leaseOrder.setStart(rs.getDate("start"));
-                leaseOrder.setEnd(rs.getDate("end"));
+                leaseOrder.setStart(rs.getTimestamp("start"));
+                leaseOrder.setEnd(rs.getTimestamp("end"));
                 leaseOrder.setStatus(rs.getInt("status"));
                 leaseOrder.setPrice(rs.getDouble("price"));
                 leaseOrder.setDescription(rs.getString("description"));
@@ -243,8 +245,8 @@ public class LeaseOrderDAO {
                 leaseOrder.setId(rs.getInt("id"));
                 leaseOrder.setUid(rs.getInt("uid"));
                 leaseOrder.setAccountId(rs.getInt("account_id"));
-                leaseOrder.setStart(rs.getDate("start"));
-                leaseOrder.setEnd(rs.getDate("end"));
+                leaseOrder.setStart(rs.getTimestamp("start"));
+                leaseOrder.setEnd(rs.getTimestamp("end"));
                 leaseOrder.setStatus(rs.getInt("status"));
                 leaseOrder.setPrice(rs.getDouble("price"));
                 leaseOrder.setDescription(rs.getString("description"));
