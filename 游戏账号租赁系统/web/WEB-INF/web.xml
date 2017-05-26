@@ -67,9 +67,17 @@
         <servlet-name>RentListServlet</servlet-name>
         <servlet-class>com.gamesLease.servlet.RentListServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RentListServlet</servlet-name>
-        <url-pattern>rentList</url-pattern>
+        <url-pattern>/rentList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAuditServlet</servlet-name>

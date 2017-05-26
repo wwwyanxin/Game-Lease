@@ -224,4 +224,40 @@ public class LeaseOrderDAO {
         }
         return result;
     }
+
+    public List<LeaseOrder> queryLeaseOrderByDescription(String description,Integer status) {//根据描述查找
+        List<LeaseOrder> result=null;
+        try{
+            Connection conn=new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from lease_order where description like ? And status=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,"%"+description+"%");
+            ps.setInt(2,status);
+            ResultSet rs=ps.executeQuery();
+            result=new ArrayList<>();
+            LeaseOrder leaseOrder=null;
+            while (rs.next()) {
+                leaseOrder=new LeaseOrder();
+
+                leaseOrder.setId(rs.getInt("id"));
+                leaseOrder.setUid(rs.getInt("uid"));
+                leaseOrder.setAccountId(rs.getInt("account_id"));
+                leaseOrder.setStart(rs.getDate("start"));
+                leaseOrder.setEnd(rs.getDate("end"));
+                leaseOrder.setStatus(rs.getInt("status"));
+                leaseOrder.setPrice(rs.getDouble("price"));
+                leaseOrder.setDescription(rs.getString("description"));
+
+                result.add(leaseOrder);
+            }
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 }

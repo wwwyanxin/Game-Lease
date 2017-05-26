@@ -18,13 +18,13 @@
     <a href="login.jsp">退出登录</a>
 </p>
 
-<h1 align="center">${user.name}</h1><br>
+<h1 align="center">${user.name}</h1>
 <p align="center">账户余额:${user.balance} &nbsp<a href="recharge">充值</a></p>
 
 <h2>账号出租单:</h2>
 
 <c:forEach items="${leaseMapList}" var="leaseMap" varStatus="st">
-    <table align="center" border="1" cellspacing="1" bgcolor="#add8e6">
+    <table align="center" border="1" cellspacing="0" bgcolor="#add8e6" width="700px">
         <tr>
             <td>game</td>
             <td>account-info</td>
@@ -52,7 +52,7 @@
 
 <h2>账号租赁单:</h2>
 <c:forEach items="${rentMapList}" var="rentMap" varStatus="st">
-    <table align="center" border="1" cellspacing="1" bgcolor="#fff8dc">
+    <table align="center" border="1" cellspacing="0" bgcolor="#add8e6" width="700px">
         <tr>
             <td>game</td>
             <td>account-info</td>

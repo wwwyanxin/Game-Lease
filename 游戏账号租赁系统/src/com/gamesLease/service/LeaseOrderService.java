@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class LeaseOrderService {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
-    private Map<Integer,Object> status;
+    private Map<Integer, Object> status;
 
     public LeaseOrderService() {
         status = new HashMap<>();
@@ -29,19 +29,19 @@ public class LeaseOrderService {
     }
 
     public List<Map<String, Object>> getLeaseInfoMapList() {
-        List<Map<String, Object>> leaseInfoMapList=null;
+        List<Map<String, Object>> leaseInfoMapList = null;
 
-        AccountInfoDAO accountInfoDAO=new AccountInfoDAO();
-        GameDAO gameDAO=new GameDAO();
-        LeaseOrderDAO leaseOrderDAO=new LeaseOrderDAO();
-        UserDAO userDAO=new UserDAO();
+        AccountInfoDAO accountInfoDAO = new AccountInfoDAO();
+        GameDAO gameDAO = new GameDAO();
+        LeaseOrderDAO leaseOrderDAO = new LeaseOrderDAO();
+        UserDAO userDAO = new UserDAO();
 
-        List<LeaseOrder> leaseOrderList=leaseOrderDAO.queryLeaseOrder();
-        leaseInfoMapList=new ArrayList<>();
-        Iterator iterator=leaseOrderList.iterator();
-        LeaseOrder leaseOrder=null;
+        List<LeaseOrder> leaseOrderList = leaseOrderDAO.queryLeaseOrder();
+        leaseInfoMapList = new ArrayList<>();
+        Iterator iterator = leaseOrderList.iterator();
+        LeaseOrder leaseOrder = null;
         while (iterator.hasNext()) {
-            leaseOrder= (LeaseOrder) iterator.next();
+            leaseOrder = (LeaseOrder) iterator.next();
 
             Map<String, Object> leaseMap = new HashMap<>();
             User user = userDAO.getUserById(leaseOrder.getUid());
@@ -52,7 +52,59 @@ public class LeaseOrderService {
             String end = dateFormat.format(leaseOrder.getEnd());
 
 
-            leaseMap.put("user",user.getName());
+            leaseMap.put("user", user.getName());
+            leaseMap.put("leaseId", leaseOrder.getId());
+            leaseMap.put("game", game.getName());
+            leaseMap.put("account", accountInfo.getAccount());
+            leaseMap.put("password", accountInfo.getPassword());
+            leaseMap.put("start", start);
+            leaseMap.put("end", end);
+            leaseMap.put("price", leaseOrder.getPrice());
+            leaseMap.put("status", status.get(leaseOrder.getStatus()));
+            leaseMap.put("description", leaseOrder.getDescription());
+
+            leaseInfoMapList.add(leaseMap);
+        }
+        return leaseInfoMapList;
+    }
+
+    public List<Map<String, Object>> getLeaseInfoMapList(String gid, String description, Integer sta) {
+        List<Map<String, Object>> leaseInfoMapList = null;
+
+        AccountInfoDAO accountInfoDAO = new AccountInfoDAO();
+        GameDAO gameDAO = new GameDAO();
+        LeaseOrderDAO leaseOrderDAO = new LeaseOrderDAO();
+        UserDAO userDAO = new UserDAO();
+
+        List<LeaseOrder> leaseOrderList = null;
+        leaseOrderList = leaseOrderDAO.queryLeaseOrderByDescription(description, sta);//根据描述查找
+        if (!"all".equals(gid)&&0!=leaseOrderList.size()) {
+            //根据游戏id过滤
+            Iterator<LeaseOrder> iterator = leaseOrderList.iterator();//遍历链表,挑出符合游戏id和出租单
+            while (iterator.hasNext()) {
+                LeaseOrder leaseOrder = iterator.next();//获得leaseOrder
+                AccountInfo accountInfo = accountInfoDAO.getAccountInfoById(leaseOrder.getAccountId());//根据leaseOrder的accountId找到Account
+                if (!Integer.valueOf(gid).equals(accountInfo.getGameId())) {//如果gid!=此account的gameId,remove此leaseOrder
+                    iterator.remove();
+                }
+            }
+        }
+        leaseInfoMapList = new ArrayList<>();
+        Iterator iterator = leaseOrderList.iterator();
+        LeaseOrder leaseOrder = null;
+        while (iterator.hasNext()) {
+            leaseOrder = (LeaseOrder) iterator.next();
+
+            Map<String, Object> leaseMap = new HashMap<>();
+            User user = userDAO.getUserById(leaseOrder.getUid());
+            AccountInfo accountInfo = accountInfoDAO.getAccountInfoById(leaseOrder.getAccountId());
+            Game game = gameDAO.getGameById(accountInfo.getGameId());
+
+            String start = dateFormat.format(leaseOrder.getStart());
+            String end = dateFormat.format(leaseOrder.getEnd());
+
+
+            leaseMap.put("user", user.getName());
             leaseMap.put("leaseId", leaseOrder.getId());
             leaseMap.put("game", game.getName());
             leaseMap.put("account", accountInfo.getAccount());
@@ -69,19 +121,19 @@ public class LeaseOrderService {
     }
 
     public List<Map<String, Object>> getLeaseInfoMapList(Integer sta) {
-        List<Map<String, Object>> leaseInfoMapList=null;
+        List<Map<String, Object>> leaseInfoMapList = null;
 
-        AccountInfoDAO accountInfoDAO=new AccountInfoDAO();
-        GameDAO gameDAO=new GameDAO();
-        LeaseOrderDAO leaseOrderDAO=new LeaseOrderDAO();
-        UserDAO userDAO=new UserDAO();
+        AccountInfoDAO accountInfoDAO = new AccountInfoDAO();
+        GameDAO gameDAO = new GameDAO();
+        LeaseOrderDAO leaseOrderDAO = new LeaseOrderDAO();
+        UserDAO userDAO = new UserDAO();
 
-        List<LeaseOrder> leaseOrderList=leaseOrderDAO.queryLeaseOrderByStatus(sta);
-        leaseInfoMapList=new ArrayList<>();
-        Iterator iterator=leaseOrderList.iterator();
-        LeaseOrder leaseOrder=null;
+        List<LeaseOrder> leaseOrderList = leaseOrderDAO.queryLeaseOrderByStatus(sta);
+        leaseInfoMapList = new ArrayList<>();
+        Iterator iterator = leaseOrderList.iterator();
+        LeaseOrder leaseOrder = null;
         while (iterator.hasNext()) {
-            leaseOrder= (LeaseOrder) iterator.next();
+            leaseOrder = (LeaseOrder) iterator.next();
 
             Map<String, Object> leaseMap = new HashMap<>();
             User user = userDAO.getUserById(leaseOrder.getUid());
@@ -92,7 +144,7 @@ public class LeaseOrderService {
             String end = dateFormat.format(leaseOrder.getEnd());
 
 
-            leaseMap.put("user",user.getName());
+            leaseMap.put("user", user.getName());
             leaseMap.put("leaseId", leaseOrder.getId());
             leaseMap.put("game", game.getName());
             leaseMap.put("account", accountInfo.getAccount());

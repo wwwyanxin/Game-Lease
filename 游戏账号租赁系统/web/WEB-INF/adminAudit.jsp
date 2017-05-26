@@ -23,11 +23,8 @@
 <h2>账号出租单:</h2>
 <form action="adminAudit" method="post">
 <c:forEach items="${leaseMapList}" var="leaseMap" varStatus="st">
-    <table align="center" border="1" cellspacing="1" bgcolor="#add8e6">
-        <%--<form action="" method="post">--%>
-        <%--<label><input name="audit" type="radio" value="pass"/>通过</label>--%>
-            <%--<label><input name="audit" type="radio" value="noPass"/>不通过</label>--%>
-        <%--</form>--%>
+    <table align="center" border="1" cellspacing="0" bgcolor="#add8e6" width="700px">
+
         <tr>
             <td>用户:${leaseMap.user}</td>
             <td colspan="5">出租单号:${leaseMap.leaseId}</td>

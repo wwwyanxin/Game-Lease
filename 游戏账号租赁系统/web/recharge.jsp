@@ -11,6 +11,11 @@
     <title>充值</title>
 </head>
 <body>
+<p>
+    <a href="menu.jsp">返回到主页</a>&nbsp;
+    <a href="login.jsp">退出登录</a>
+</p>
+
 <h1 align="center" >
     ${user.name}
 </h1>
@@ -26,7 +31,7 @@
                     <option value="Wechatpay">微信支付</option>
                 </select>
             </td>
-            <td>充值金额:<input type="number" value="100" name="amount"></td>
+            <td>充值金额:<input type="number" value="100" name="amount" min="1"></td>
         </tr>
         <tr>
             <td colspan="2">
