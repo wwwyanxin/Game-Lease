@@ -91,7 +91,7 @@ public class LeaseOrderDAO {
             ps.execute();
             ResultSet rs=ps.getGeneratedKeys();
             if (rs.next()) {
-                leaseOrder.setId(rs.getInt("id"));
+                leaseOrder.setId(rs.getInt(1));
                 return true;
             }
             ps.close();

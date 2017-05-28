@@ -15,19 +15,18 @@ public class OrderItemDAO {
         try{
             Connection conn=new DBUtil().getConncetion();
             String sql = "" +
-                    "insert into orderitem (lease_id,uid,start,end,cost) values(?,?,?,?,?)";
+                    "insert into orderitem (lease_id,uid,end,cost) values(?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, orderItem.getLeaseId());
             ps.setInt(2, orderItem.getUid());
-            ps.setTimestamp(3, new Timestamp(orderItem.getStart().getTime()));
-            ps.setTimestamp(4, new Timestamp(orderItem.getEnd().getTime()));
+            ps.setTimestamp(3, new Timestamp(orderItem.getEnd().getTime()));
 
-            ps.setDouble(5,orderItem.getCost());
+            ps.setDouble(4,orderItem.getCost());
 
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                orderItem.setId(rs.getInt("id"));
+                orderItem.setId(rs.getInt(1));
                 ps.close();
                 conn.close();
                 return true;

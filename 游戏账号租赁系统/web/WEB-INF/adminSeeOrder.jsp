@@ -31,7 +31,7 @@
             <td>end</td>
             <td>lease-user</td>
             <td>price</td>
-            <td>status</td>
+            <td>cost</td>
         </tr>
         <tr>
             <td>${rentMap.game}</td>

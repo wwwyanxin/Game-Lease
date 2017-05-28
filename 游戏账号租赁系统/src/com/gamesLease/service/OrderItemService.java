@@ -37,7 +37,7 @@ public class OrderItemService {
             for (OrderItem orderItem : orderItemList) {
                 Map<String, Object> rentMap = new HashMap<>();
 
-                LeaseOrder leaseOrder = leaseOrderDAO.getLeaseOrderByAccountId(orderItem.getLeaseId());
+                LeaseOrder leaseOrder = leaseOrderDAO.getLeaseOrderById(orderItem.getLeaseId());
                 AccountInfo accountInfo = accountInfoDAO.getAccountInfoById(leaseOrder.getAccountId());
                 Game game = gameDAO.getGameById(accountInfo.getGameId());
                 User leaseUser = userDAO.getUserById(leaseOrder.getUid());

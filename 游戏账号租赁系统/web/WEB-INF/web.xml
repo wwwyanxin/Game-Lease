@@ -71,6 +71,14 @@
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>com.gamesLease.servlet.CartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RentServlet</servlet-name>
+        <servlet-class>com.gamesLease.servlet.RentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RentServlet</servlet-name>
+        <url-pattern>/rent</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CartServlet</servlet-name>
         <url-pattern>/cart</url-pattern>

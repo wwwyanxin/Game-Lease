@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -16,6 +18,9 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Integer leaseId=Integer.valueOf(request.getParameter("leaseId"));
         Map<String, Object> leaseMap = new LeaseOrderService().getLeaseInfoMap(leaseId);
+        //获取end,格式化为maxDate(将yyyy-MM-dd HH:mm:ss  变为yyyy-MM-ddTHH:mm:ss)
+        String maxDate=((String)leaseMap.get("end")).replaceFirst(" ","T");
+        leaseMap.put("maxDate", maxDate);
         request.setAttribute("leaseMap",leaseMap);
 
         request.getRequestDispatcher("/WEB-INF/cart.jsp").forward(request, response);
