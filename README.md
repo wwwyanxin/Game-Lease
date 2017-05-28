@@ -1,7 +1,7 @@
 # JAVA
 servlet+jsp+jdbc  
 
-大二软件工程综合设计作业,基于servlet+jsp+jdbc   没有使用框架,前端只用了html和极少的css
+大二软件工程综合设计作业,基于servlet+jsp+jdbc   没有使用框架,前端用了html+css和一点js代码
 
 有两种角色,User(用户)和Admin(管理员)  
 
