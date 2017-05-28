@@ -80,9 +80,16 @@ public class UserInfoService {
                 String start = dateFormat.format(orderItem.getStart());
                 String end = dateFormat.format(orderItem.getEnd());
 
+                //如果此出租单状态已不是被租状态,则不显示密码
+                String password=null;
+                if (2 != leaseOrder.getStatus()) {
+                    password = "****(过期)****";
+                } else {
+                    password=accountInfo.getPassword();
+                }
                 rentMap.put("game", game.getName());
                 rentMap.put("account", accountInfo.getAccount());
-                rentMap.put("password", accountInfo.getPassword());
+                rentMap.put("password",password);
                 rentMap.put("start", start);
                 rentMap.put("end", end);
                 rentMap.put("price", leaseOrder.getPrice());

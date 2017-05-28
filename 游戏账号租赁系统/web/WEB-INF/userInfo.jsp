@@ -52,7 +52,7 @@
 
 <h2>账号租赁单:</h2>
 <c:forEach items="${rentMapList}" var="rentMap" varStatus="st">
-    <table align="center" border="1" cellspacing="0" bgcolor="#add8e6" width="700px">
+    <table align="center" border="1" cellspacing="0" bgcolor="#add8e6" width="800px">
         <tr>
             <td>game</td>
             <td>account-info</td>
