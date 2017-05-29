@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <td>
-                账号:<input type="text" value="在此输入账号" name="account" required>
+                账号:<input type="text" name="account" required>
             </td>
             <td>
                 密码:<input type="password" name="password" required>
