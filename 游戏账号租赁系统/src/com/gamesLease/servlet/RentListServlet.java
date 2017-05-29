@@ -21,6 +21,7 @@ public class RentListServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("user");
         if (null == user) {
             response.sendRedirect("login.jsp");
+            return;
         }
 
         request.setCharacterEncoding("utf-8");
@@ -38,6 +39,13 @@ public class RentListServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+
         List<Map<String, Object>> leaseMapList = new LeaseOrderService().getLeaseInfoMapList(1);//获得可租用的出租信息
         List<Game> gameList = new GameDAO().queryGame();
 

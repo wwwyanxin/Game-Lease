@@ -27,6 +27,7 @@ public class LeaseServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("user");
         if (null == user) {
             response.sendRedirect("login.jsp");
+            return;
         }
 
         request.setCharacterEncoding("utf-8");
@@ -59,6 +60,12 @@ public class LeaseServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
 
         List<Game> gameList = gameDAO.queryGame();
 

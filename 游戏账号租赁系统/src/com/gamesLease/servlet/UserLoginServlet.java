@@ -21,6 +21,7 @@ public class UserLoginServlet extends HttpServlet {
 
         if (null == user) {
             response.sendRedirect("login.jsp");
+            return;
         } else {
             request.getSession().setAttribute("user", user);
             request.getRequestDispatcher("menu.jsp").forward(request, response);

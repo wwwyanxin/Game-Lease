@@ -23,6 +23,7 @@ public class AdminSeeOrderServlet extends HttpServlet {
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         if (null == admin) {
             response.sendRedirect("adminLogin.jsp");
+            return;
         }
 
         List<Map<String,Object>> orderMapList=new OrderItemService().getOrderInfoMapList();

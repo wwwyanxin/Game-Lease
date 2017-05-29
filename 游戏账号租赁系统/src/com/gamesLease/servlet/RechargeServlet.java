@@ -17,6 +17,7 @@ public class RechargeServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("user");
         if (null == user) {
             response.sendRedirect("login.jsp");
+            return;
         }
 
         String platform = request.getParameter("platform");
@@ -33,6 +34,12 @@ public class RechargeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
         response.sendRedirect("/gamesLease/recharge.jsp");
     }
 }

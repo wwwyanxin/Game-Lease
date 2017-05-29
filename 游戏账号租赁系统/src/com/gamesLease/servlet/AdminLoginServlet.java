@@ -39,6 +39,7 @@ public class AdminLoginServlet extends HttpServlet {
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         if (null != admin) {
             request.getRequestDispatcher("/WEB-INF/adminMenu.jsp").forward(request, response);
+            return;
         }else {
             response.sendRedirect("adminLogin.jsp");
         }

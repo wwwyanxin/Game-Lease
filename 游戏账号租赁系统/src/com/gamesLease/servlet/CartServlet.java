@@ -20,6 +20,7 @@ public class CartServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("user");
         if (null == user) {
             response.sendRedirect("login.jsp");
+            return;
         }
 
         Integer leaseId=Integer.valueOf(request.getParameter("leaseId"));

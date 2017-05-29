@@ -23,6 +23,7 @@ public class AdminAuditServlet extends HttpServlet {
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         if (null == admin) {
             response.sendRedirect("adminLogin.jsp");
+            return;
         }
 
         LeaseOrderDAO leaseOrderDAO=new LeaseOrderDAO();
@@ -53,6 +54,7 @@ public class AdminAuditServlet extends HttpServlet {
         Admin admin = (Admin) request.getSession().getAttribute("admin");
         if (null == admin) {
             response.sendRedirect("adminLogin.jsp");
+            return;
         }
 
         List<Map<String, Object>> leaseMapList = new LeaseOrderService().getLeaseInfoMapList(0);//0是未审核的出租单

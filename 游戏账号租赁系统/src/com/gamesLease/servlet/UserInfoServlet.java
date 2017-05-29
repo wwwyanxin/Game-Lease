@@ -24,6 +24,7 @@ public class UserInfoServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("user");
         if (null == user) {
             response.sendRedirect("login.jsp");
+            return;
         }
 
             List<Map<String,Object>> leaseMapList=new UserInfoService().getLeaseMapList(user);

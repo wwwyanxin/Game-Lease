@@ -20,6 +20,7 @@ public class RegisterServlet extends HttpServlet {
         User user = userDAO.getUser(name);
         if (null != user) {//数据库中已经存在此账号
             response.sendRedirect("register.jsp");
+            return;
         } else {
             user=new User();
             user.setName(name);
