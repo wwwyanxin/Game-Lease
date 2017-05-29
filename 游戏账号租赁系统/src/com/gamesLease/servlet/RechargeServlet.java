@@ -14,9 +14,13 @@ import java.io.IOException;
  */
 public class RechargeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+        }
+
         String platform = request.getParameter("platform");
         Double amount = Double.valueOf(request.getParameter("amount"));
-        User user = (User) request.getSession().getAttribute("user");
         if (amount <= 0) {
             response.sendRedirect("/WEB-INF/inputError.jsp");
         }

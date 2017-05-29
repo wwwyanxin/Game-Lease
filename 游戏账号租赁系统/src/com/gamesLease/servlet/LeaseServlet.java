@@ -24,6 +24,11 @@ public class LeaseServlet extends HttpServlet {
     SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");//("yyyy-MM-dd'T'HH:mm");//("yyyy-MM-dd'T'HH:mm");
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+        }
+
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 
@@ -41,7 +46,6 @@ public class LeaseServlet extends HttpServlet {
             e.printStackTrace();
         }
         Date end = calendar.getTime();
-        User user = (User) request.getSession().getAttribute("user");
 
         if (0 == account.length() || 0 == password.length()||price<0) {
             request.getRequestDispatcher("/WEB-INF/inputError.jsp");

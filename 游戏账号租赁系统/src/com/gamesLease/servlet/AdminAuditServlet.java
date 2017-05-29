@@ -1,6 +1,7 @@
 package com.gamesLease.servlet;
 
 
+import com.gamesLease.bean.Admin;
 import com.gamesLease.bean.LeaseOrder;
 import com.gamesLease.dao.LeaseOrderDAO;
 import com.gamesLease.service.LeaseOrderService;
@@ -19,6 +20,11 @@ import java.util.Map;
  */
 public class AdminAuditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        if (null == admin) {
+            response.sendRedirect("adminLogin.jsp");
+        }
+
         LeaseOrderDAO leaseOrderDAO=new LeaseOrderDAO();
         LeaseOrder leaseOrder=null;
 
@@ -44,6 +50,11 @@ public class AdminAuditServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        if (null == admin) {
+            response.sendRedirect("adminLogin.jsp");
+        }
+
         List<Map<String, Object>> leaseMapList = new LeaseOrderService().getLeaseInfoMapList(0);//0是未审核的出租单
         request.setAttribute("leaseMapList",leaseMapList);
         request.getRequestDispatcher("/WEB-INF/adminAudit.jsp").forward(request, response);

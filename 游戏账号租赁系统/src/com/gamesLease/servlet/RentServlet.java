@@ -18,10 +18,14 @@ import java.util.Date;
  */
 public class RentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+        }
+
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");//("yyyy-MM-dd'T'HH:mm");//("yyyy-MM-dd'T'HH:mm");
 
         Integer leaseId= Integer.valueOf(request.getParameter("leaseId"));
-        User user = (User) request.getSession().getAttribute("user");
         Double spend = Double.valueOf(request.getParameter("spendMoney"));
         Date end=null;
         try {

@@ -1,5 +1,6 @@
 package com.gamesLease.servlet;
 
+import com.gamesLease.bean.User;
 import com.gamesLease.service.LeaseOrderService;
 
 import javax.servlet.ServletException;
@@ -16,6 +17,11 @@ import java.util.Map;
  */
 public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+        }
+
         Integer leaseId=Integer.valueOf(request.getParameter("leaseId"));
         Map<String, Object> leaseMap = new LeaseOrderService().getLeaseInfoMap(leaseId);
         //获取end,格式化为maxDate(将yyyy-MM-dd HH:mm:ss  变为yyyy-MM-ddTHH:mm:ss)

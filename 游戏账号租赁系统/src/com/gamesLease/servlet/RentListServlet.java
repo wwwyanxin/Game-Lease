@@ -1,6 +1,7 @@
 package com.gamesLease.servlet;
 
 import com.gamesLease.bean.Game;
+import com.gamesLease.bean.User;
 import com.gamesLease.dao.GameDAO;
 import com.gamesLease.service.LeaseOrderService;
 
@@ -17,6 +18,11 @@ import java.util.Map;
  */
 public class RentListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+        }
+
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
 

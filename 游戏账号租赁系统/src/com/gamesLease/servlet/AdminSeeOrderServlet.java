@@ -1,5 +1,6 @@
 package com.gamesLease.servlet;
 
+import com.gamesLease.bean.Admin;
 import com.gamesLease.service.OrderItemService;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,11 @@ public class AdminSeeOrderServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Admin admin = (Admin) request.getSession().getAttribute("admin");
+        if (null == admin) {
+            response.sendRedirect("adminLogin.jsp");
+        }
+
         List<Map<String,Object>> orderMapList=new OrderItemService().getOrderInfoMapList();
         request.setAttribute("rentMapList",orderMapList);
         request.getRequestDispatcher("/WEB-INF/adminSeeOrder.jsp").forward(request, response);

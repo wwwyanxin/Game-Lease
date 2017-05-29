@@ -22,7 +22,9 @@ public class UserInfoServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User)request.getSession().getAttribute("user");
-        if (null != user) {
+        if (null == user) {
+            response.sendRedirect("login.jsp");
+        }
 
             List<Map<String,Object>> leaseMapList=new UserInfoService().getLeaseMapList(user);
             List<Map<String,Object>> rentMapList=new UserInfoService().getRentMapList(user);
@@ -30,6 +32,5 @@ public class UserInfoServlet extends HttpServlet {
             request.setAttribute("leaseMapList",leaseMapList);
             request.setAttribute("rentMapList",rentMapList);
             request.getRequestDispatcher("/WEB-INF/userInfo.jsp").forward(request, response);
-        }
     }
 }
