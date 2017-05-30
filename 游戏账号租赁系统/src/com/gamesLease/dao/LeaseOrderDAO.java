@@ -11,14 +11,14 @@ import java.util.List;
  * Created by wyx11 on 2017-5-16.
  */
 public class LeaseOrderDAO {
-    public LeaseOrder getLeaseOrderByAccountId(Integer AccountId) {
+    public LeaseOrder getLeaseOrderByAccountId(Integer accountId) {
         LeaseOrder result=null;
         try {
             Connection conn = new DBUtil().getConncetion();
             String sql = "" +
                     "select * from lease_order where account_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, AccountId);
+            ps.setInt(1, accountId);
 
             ResultSet rs=ps.executeQuery();
             if (rs.next()) {

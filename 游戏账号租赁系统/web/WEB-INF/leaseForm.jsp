@@ -12,8 +12,46 @@
 <head>
     <title>出租表单</title>
 </head>
-<body>
+<body onload="minDate()">
 
+
+<script>
+    function minDate() {
+
+        clock = nowDate();
+        document.getElementById("end").setAttribute("min", clock);
+
+    }
+
+    function nowDate() {//可选的最小时间
+
+        var now = new Date();
+        var year = now.getFullYear();       //年
+        var month = now.getMonth() + 1;     //月
+        var day = now.getDate();            //日
+        var hh = now.getHours();            //时
+        var mm = now.getMinutes();          //分
+
+
+        var clock = year + "-";
+        if (month < 10)
+            clock += "0";
+        clock += month + "-";
+        if (day < 10)
+            clock += "0";
+        clock += day + "T";
+
+        if (hh < 10)
+            clock += "0";
+        clock += hh + ":";
+
+        if (mm < 10)
+            clock += '0';
+        clock += mm;
+
+        return clock;
+    }
+</script>
 <p>
     <a href="menu.jsp">返回到主页</a>&nbsp;
     <a href="login.jsp">退出登录</a>
@@ -44,7 +82,8 @@
         </tr>
         <tr>
             <td colspan="2">
-                请填写账号下架收回时间:<input type="datetime-local" name="end" required/>
+                请填写账号下架收回时间:<input type="datetime-local" name="end" min=""
+                                   id="end" required/>
             </td>
         </tr>
         <br>

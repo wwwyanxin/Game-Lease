@@ -14,6 +14,9 @@ import java.io.IOException;
  */
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         UserDAO userDAO=new UserDAO();
@@ -21,7 +24,10 @@ public class RegisterServlet extends HttpServlet {
         if (null != user) {//数据库中已经存在此账号
             response.sendRedirect("register.jsp");
             return;
-        } else {
+        }else if (0 == name.trim().length() || 0 == password.trim().length()) {
+            request.getRequestDispatcher("/WEB-INF/inputError.jsp?errorMessage=账号或密码不能为空").forward(request, response);
+            return;
+        }  else {
             user=new User();
             user.setName(name);
             user.setPassword(password);

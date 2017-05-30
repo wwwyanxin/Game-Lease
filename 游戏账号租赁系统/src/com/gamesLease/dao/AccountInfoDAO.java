@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by wyx11 on 2017-5-16.
@@ -17,10 +19,35 @@ public class AccountInfoDAO {
         try{
             Connection conn=new DBUtil().getConncetion();
             String sql = "" +
-                    " select * from account_info where name=? and password=? ;";
+                    " select * from account_info where account=? and password=? ;";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, account);
             ps.setString(2, password);
+
+            ResultSet rs=ps.executeQuery();
+            if (rs.next()) {
+                result=new AccountInfo();
+                result.setId(rs.getInt("id"));
+                result.setAccount(rs.getString("account"));
+                result.setPassword(rs.getString("password"));
+                result.setGameId(rs.getInt("game_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public AccountInfo getAccountInfo(String account) {
+        AccountInfo result=null;
+        try{
+            Connection conn=new DBUtil().getConncetion();
+            String sql = "" +
+                    " select * from account_info where account=? ;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, account);
 
             ResultSet rs=ps.executeQuery();
             if (rs.next()) {
@@ -62,6 +89,39 @@ public class AccountInfoDAO {
         return result;
     }
 
+    public List<AccountInfo> queryByAccount(String account) {
+        List<AccountInfo> result=null;
+        try {
+            Connection conn=new DBUtil().getConncetion();
+            String sql = "" +
+                    "select * from account_info where account=?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, account);
+
+            ResultSet rs=ps.executeQuery();
+
+            result = new ArrayList<>();
+            while (rs.next()) {
+                AccountInfo accountInfo=new AccountInfo();
+
+                accountInfo.setId(rs.getInt("id"));
+                accountInfo.setAccount(rs.getString("account"));
+                accountInfo.setPassword(rs.getString("password"));
+                accountInfo.setGameId(rs.getInt("game_id"));
+
+                result.add(accountInfo);
+            }
+
+            conn.close();
+            ps.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 /*    public AccountInfo getAccountInfoByGameId(Integer id) {
         AccountInfo result=null;
         try{

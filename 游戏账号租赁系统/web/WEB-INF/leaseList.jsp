@@ -56,14 +56,18 @@
             <td>description</td>
             <td colspan="5">${leaseMap.description}</td>
         </tr>
-        <tr>
-            <form action="cart" method="post">
-                <td colspan="6" align="right">
-                    <input type="hidden" name="leaseId" value="${leaseMap.leaseId}">
-                    <input type="submit" value="租赁" style="background-color: #deb858;height: 25px;width: 65px">
-                </td>
-            </form>
-        </tr>
+
+        <c:if test="${user.name ne leaseMap.user}">  <%--如果是本人出租的账单,则不显示租赁按钮--%>
+            <tr>
+                <form action="cart" method="post">
+                    <td colspan="6" align="right">
+                        <input type="hidden" name="leaseId" value="${leaseMap.leaseId}">
+                        <input type="submit" value="租赁" style="background-color: #deb858;height: 25px;width: 65px">
+                    </td>
+                </form>
+            </tr>
+        </c:if>
+
     </table>
     <br>
 </c:forEach>
