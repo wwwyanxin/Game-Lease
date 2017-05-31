@@ -56,6 +56,7 @@ public class OrderItemDAO {
                 orderItem.setStart(rs.getTimestamp("start"));
                 orderItem.setEnd(rs.getTimestamp("end"));
                 orderItem.setCost(rs.getDouble("cost"));
+                orderItem.setStatus(rs.getInt("status"));
 
                 result.add(orderItem);
             }
@@ -86,6 +87,7 @@ public class OrderItemDAO {
                 orderItem.setStart(rs.getTimestamp("start"));
                 orderItem.setEnd(rs.getTimestamp("end"));
                 orderItem.setCost(rs.getDouble("cost"));
+                orderItem.setStatus(rs.getInt("status"));
 
                 result.add(orderItem);
             }
@@ -116,6 +118,8 @@ public class OrderItemDAO {
                 result.setStart(rs.getTimestamp("start"));
                 result.setEnd(rs.getTimestamp("end"));
                 result.setCost(rs.getDouble("cost"));
+                result.setStatus(rs.getInt("status"));
+
             }
             ps.close();
             conn.close();

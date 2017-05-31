@@ -80,9 +80,9 @@ public class UserInfoService {
                 String start = dateFormat.format(orderItem.getStart());
                 String end = dateFormat.format(orderItem.getEnd());
 
-                //如果此出租单状态已不是被租状态,则不显示密码
+                //如果租赁单状态已不是被租状态,则不显示密码
                 String password=null;
-                if (2 != leaseOrder.getStatus()) {
+                if (1!=orderItem.getStatus()) {
                     password = "****(过期)****";
                 } else {
                     password=accountInfo.getPassword();

@@ -16,7 +16,6 @@
 
     function spend() {//计算花费
 
-
         var nowTime = new Date().getTime();
         var end = document.getElementById("end").value;
         end = end.replace("T", " ");
