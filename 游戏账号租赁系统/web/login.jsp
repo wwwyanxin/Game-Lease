@@ -31,5 +31,6 @@
     没有账号?点击
     <a href="register.jsp" type="button" value="注册">注册账号</a>
 </div>
+<p align="center">${param.errorMessage}</p>
 </body>
 </html>

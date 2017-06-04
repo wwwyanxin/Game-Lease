@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="gamesLease:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/gamesLease_war</output-path>
+    <root id="archive" name="gamesLease_war.war">
+      <element id="artifact" artifact-name="gamesLease:war exploded" />
+    </root>
+  </artifact>
+</component>

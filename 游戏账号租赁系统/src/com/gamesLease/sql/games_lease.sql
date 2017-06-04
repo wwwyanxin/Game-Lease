@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-05-31 20:34:16
+Date: 2017-06-04 01:25:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `account_info` (
   `password` varchar(20) NOT NULL,
   `game_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of account_info
@@ -116,6 +116,7 @@ INSERT INTO `account_info` VALUES ('90', '123456789', '123456789', '1');
 INSERT INTO `account_info` VALUES ('91', 'hdjfkrk', 'djjdjjjdjr', '6');
 INSERT INTO `account_info` VALUES ('92', 'waxiness', '19970725q', '12');
 INSERT INTO `account_info` VALUES ('93', 'wazi1997', '19970725', '4');
+INSERT INTO `account_info` VALUES ('94', '55345345', '36565', '12');
 
 -- ----------------------------
 -- Table structure for admin
@@ -174,14 +175,14 @@ CREATE TABLE `lease_order` (
   `status` int(11) NOT NULL DEFAULT '0' COMMENT '-2审核未通过,-1已下架,0审核中,1可租,2已被租',
   `description` varchar(10000) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lease_order
 -- ----------------------------
 INSERT INTO `lease_order` VALUES ('1', '1', '1', '2017-05-12 00:42:41', '2017-05-27 00:42:46', '10.00', '-1', '一刀88级');
 INSERT INTO `lease_order` VALUES ('2', '2', '2', '2017-04-25 00:49:50', '2017-05-27 00:49:53', '30.00', '-1', '无fuck说');
-INSERT INTO `lease_order` VALUES ('3', '1', '3', '2017-05-27 21:25:18', '2017-06-04 00:54:58', '15.00', '2', '发个梵蒂冈地方给对方');
+INSERT INTO `lease_order` VALUES ('3', '1', '3', '2017-05-27 21:25:18', '2017-06-04 00:54:58', '15.00', '-1', '发个梵蒂冈地方给对方');
 INSERT INTO `lease_order` VALUES ('4', '1', '4', '2017-05-27 22:26:23', '2017-05-27 23:26:38', '30.00', '-1', null);
 INSERT INTO `lease_order` VALUES ('5', '1', '11', '2017-05-24 22:52:09', '2017-05-21 00:00:00', '3.00', '-1', '32æ¹æå¤æ¹ä¸¹åvsvså°å');
 INSERT INTO `lease_order` VALUES ('6', '1', '12', '2017-05-24 22:55:16', '2017-05-21 00:00:00', '3.00', '-1', '32惹我复方丹参vsvs地址');
@@ -219,7 +220,7 @@ INSERT INTO `lease_order` VALUES ('37', '1', '43', '2017-05-27 22:16:05', '2017-
 INSERT INTO `lease_order` VALUES ('38', '1', '44', '2017-05-27 14:01:25', '2017-05-10 00:59:00', '0.00', '-1', '');
 INSERT INTO `lease_order` VALUES ('39', '1', '45', '2017-05-27 22:45:55', '2017-05-29 00:59:00', '0.00', '-1', '');
 INSERT INTO `lease_order` VALUES ('40', '1', '46', '2017-05-27 22:43:07', '2017-05-28 12:58:00', '0.00', '-1', '');
-INSERT INTO `lease_order` VALUES ('41', '1', '47', '2017-05-27 22:16:51', '2017-05-31 23:08:00', '0.00', '1', '');
+INSERT INTO `lease_order` VALUES ('41', '1', '47', '2017-05-27 22:16:51', '2017-05-31 23:08:00', '0.00', '-1', '');
 INSERT INTO `lease_order` VALUES ('42', '1', '48', '2017-05-27 21:28:20', '2017-06-25 12:59:00', '343.00', '1', '3434324');
 INSERT INTO `lease_order` VALUES ('43', '1', '49', '2017-05-27 21:21:37', '2017-08-24 01:59:00', '15.00', '2', '');
 INSERT INTO `lease_order` VALUES ('44', '1', '50', '2017-05-27 22:17:59', '2017-07-28 03:04:00', '20.00', '1', '啊啊');
@@ -261,7 +262,8 @@ INSERT INTO `lease_order` VALUES ('79', '7', '89', '2017-05-30 16:19:24', '2018-
 INSERT INTO `lease_order` VALUES ('80', '8', '90', '2017-05-31 15:50:02', '2017-12-31 23:59:00', '10.00', '2', '账号价值10万元 ');
 INSERT INTO `lease_order` VALUES ('81', '2', '91', '2017-05-31 16:01:23', '2018-05-31 16:00:00', '1.00', '0', 'hfjdjdjdkejej');
 INSERT INTO `lease_order` VALUES ('82', '6', '92', '2017-05-31 16:03:09', '2017-09-09 16:02:00', '10.00', '1', '常年传说的大神号，全卡全金卡，各类上分卡组，可以体验大神的感觉，各种卡背应有尽有');
-INSERT INTO `lease_order` VALUES ('83', '6', '93', '2017-05-31 16:05:24', '2017-09-18 16:04:00', '0.80', '0', '上古账号，上古国服前十账号，就是厉害。');
+INSERT INTO `lease_order` VALUES ('83', '6', '93', '2017-05-31 16:05:24', '2017-09-18 16:04:00', '0.80', '1', '上古账号，上古国服前十账号，就是厉害。');
+INSERT INTO `lease_order` VALUES ('84', '2', '94', '2017-05-31 20:43:59', '2017-08-23 00:00:00', '1.00', '1', '全卡,全金');
 
 -- ----------------------------
 -- Table structure for orderitem
@@ -294,9 +296,9 @@ INSERT INTO `orderitem` VALUES ('10', '1', '39', '2017-05-27 22:45:55', '2017-05
 INSERT INTO `orderitem` VALUES ('11', '1', '48', '2017-05-27 22:48:06', '2017-05-28 13:01:00', '142.17', '0');
 INSERT INTO `orderitem` VALUES ('12', '2', '50', '2017-05-27 22:49:40', '2017-05-28 01:01:00', '26.28', '0');
 INSERT INTO `orderitem` VALUES ('13', '1', '49', '2017-05-27 22:50:08', '2017-05-28 13:01:00', '141.83', '0');
-INSERT INTO `orderitem` VALUES ('15', '6', '41', '2017-05-31 16:15:36', '2017-05-31 22:30:00', '0.00', '1');
+INSERT INTO `orderitem` VALUES ('15', '6', '41', '2017-05-31 16:15:36', '2017-05-31 22:30:00', '0.00', '0');
 INSERT INTO `orderitem` VALUES ('16', '6', '80', '2017-05-31 16:17:17', '2017-06-30 01:01:00', '7047.31', '1');
-INSERT INTO `orderitem` VALUES ('17', '6', '42', '2017-05-31 16:20:05', '2017-06-01 22:22:00', '10301.73', '1');
+INSERT INTO `orderitem` VALUES ('17', '6', '42', '2017-05-31 16:20:05', '2017-06-01 22:22:00', '10301.73', '0');
 INSERT INTO `orderitem` VALUES ('18', '1', '46', '2017-05-31 18:21:01', '2017-05-31 18:21:00', '0.00', '0');
 INSERT INTO `orderitem` VALUES ('19', '1', '46', '2017-05-31 18:29:57', '2017-05-31 18:30:00', '0.00', '0');
 INSERT INTO `orderitem` VALUES ('20', '1', '46', '2017-05-31 18:30:11', '2017-05-31 18:31:00', '0.03', '0');

@@ -14,13 +14,17 @@ import java.io.IOException;
  */
 public class UserLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+
+
         String name = request.getParameter("name");
         String password = request.getParameter("password");
 
         User user = new UserDAO().getUser(name, password);
 
         if (null == user) {
-            response.sendRedirect("login.jsp");
+            request.getRequestDispatcher("login.jsp?errorMessage=账号或密码错误!").forward(request, response);
             return;
         } else {
             request.getSession().setAttribute("user", user);

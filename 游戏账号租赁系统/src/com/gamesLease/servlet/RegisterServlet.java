@@ -22,7 +22,7 @@ public class RegisterServlet extends HttpServlet {
         UserDAO userDAO=new UserDAO();
         User user = userDAO.getUser(name);
         if (null != user) {//数据库中已经存在此账号
-            response.sendRedirect("register.jsp");
+            request.getRequestDispatcher("/WEB-INF/inputError.jsp?errorMessage=账号已存在!").forward(request, response);
             return;
         }else if (0 == name.trim().length() || 0 == password.trim().length()) {
             request.getRequestDispatcher("/WEB-INF/inputError.jsp?errorMessage=账号或密码不能为空").forward(request, response);
