@@ -3,6 +3,15 @@
     <output-path>$PROJECT_DIR$/out/artifacts/gamesLease_war</output-path>
     <root id="archive" name="gamesLease_war.war">
       <element id="artifact" artifact-name="gamesLease:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/游戏账号租赁系统/web/WEB-INF/lib/jstl.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/游戏账号租赁系统/web/WEB-INF/lib/jsp-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/游戏账号租赁系统/web/WEB-INF/lib/standard.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/游戏账号租赁系统/web/WEB-INF/lib/servlet-api.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/游戏账号租赁系统/web/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar" />
+        </element>
+      </element>
     </root>
   </artifact>
 </component>

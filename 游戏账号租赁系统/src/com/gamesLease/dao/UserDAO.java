@@ -16,7 +16,7 @@ public class UserDAO {
         try {
             Connection conn = new DBUtil().getConncetion();
             String sql = "" +
-                    " select * from USER where name=? and password=?";
+                    " select * from user where name=? and password=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             ps.setString(2, password);
@@ -41,7 +41,7 @@ public class UserDAO {
         try {
             Connection conn = new DBUtil().getConncetion();
             String sql = "" +
-                    " select * from USER where name=?";
+                    " select * from user where name=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, name);
 
@@ -67,7 +67,7 @@ public class UserDAO {
         try {
             Connection conn = new DBUtil().getConncetion();
             String sql = "" +
-                    " select * from USER where id=?";
+                    " select * from user where id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
 
