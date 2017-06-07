@@ -28,10 +28,10 @@ public class RechargeServlet extends HttpServlet {
         if (amount <= 0) {
             response.sendRedirect("/WEB-INF/inputError.jsp");
         }
-
         UserDAO userDAO=new UserDAO();
         user.setBalance(user.getBalance() + amount);
         userDAO.updateUser(user);
+        request.getSession().setAttribute("user", user);
 
         response.sendRedirect("userinfo");
     }
