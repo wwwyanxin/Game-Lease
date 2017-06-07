@@ -1,6 +1,7 @@
 package com.gamesLease.dao;
 
 import com.gamesLease.bean.LeaseOrder;
+import com.gamesLease.db.DBPool;
 import com.gamesLease.db.DBUtil;
 
 import java.sql.*;
@@ -13,11 +14,13 @@ import java.util.List;
 public class LeaseOrderDAO {
     public LeaseOrder getLeaseOrderByAccountId(Integer accountId) {
         LeaseOrder result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try {
-            Connection conn = new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from lease_order where account_id=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, accountId);
 
             ResultSet rs=ps.executeQuery();
@@ -32,23 +35,34 @@ public class LeaseOrderDAO {
                 result.setStatus(rs.getInt("status"));
                 result.setDescription(rs.getString("description"));
             }
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
 
     public LeaseOrder getLeaseOrderById(Integer id) {
         LeaseOrder result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try {
-            Connection conn = new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from lease_order where id=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
 
             ResultSet rs=ps.executeQuery();
@@ -63,22 +77,33 @@ public class LeaseOrderDAO {
                 result.setStatus(rs.getInt("status"));
                 result.setDescription(rs.getString("description"));
             }
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
 
     public boolean addLeaseOrder(LeaseOrder leaseOrder) {
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "insert into lease_order (uid,account_id,end,price,description) values(?,?,?,?,?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
 
             ps.setInt(1,leaseOrder.getUid());
             ps.setInt(2, leaseOrder.getAccountId());
@@ -94,25 +119,36 @@ public class LeaseOrderDAO {
                 leaseOrder.setId(rs.getInt(1));
                 return true;
             }
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return false;
     }
 
     public boolean updateLeaseOrder(LeaseOrder leaseOrder) {
+        Connection conn=null;
+        PreparedStatement ps=null;
         try {
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "update lease_order " +
                     "set end=?,price=?,status=?,description=? " +
                     "where id=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setTimestamp(1, new Timestamp(leaseOrder.getEnd().getTime()));
             ps.setDouble(2, leaseOrder.getPrice());
             ps.setInt(3, leaseOrder.getStatus());
@@ -120,22 +156,33 @@ public class LeaseOrderDAO {
             ps.setInt(5,leaseOrder.getId());
 
             ps.execute();
-            ps.close();
-            conn.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public List<LeaseOrder> queryLeaseOrder() {
         List<LeaseOrder> result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from lease_order ";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
 
             ResultSet rs=ps.executeQuery();
             result=new ArrayList<>();
@@ -154,20 +201,31 @@ public class LeaseOrderDAO {
 
                 result.add(leaseOrder);
             }
-            ps.close();
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
     public List<LeaseOrder> queryLeaseOrderByUid(Integer uid) {
         List<LeaseOrder> result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from lease_order where uid=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1,uid);
             ResultSet rs=ps.executeQuery();
             result=new ArrayList<>();
@@ -186,21 +244,32 @@ public class LeaseOrderDAO {
 
                 result.add(leaseOrder);
             }
-            ps.close();
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
 
     public List<LeaseOrder> queryLeaseOrderByStatus(Integer status) {
         List<LeaseOrder> result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from lease_order where status=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1,status);
             ResultSet rs=ps.executeQuery();
             result=new ArrayList<>();
@@ -219,21 +288,32 @@ public class LeaseOrderDAO {
 
                 result.add(leaseOrder);
             }
-            ps.close();
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
 
     public List<LeaseOrder> queryLeaseOrderByDescription(String description,Integer status) {//根据描述查找
         List<LeaseOrder> result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from lease_order where description like ? And status=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setString(1,"%"+description+"%");
             ps.setInt(2,status);
             ResultSet rs=ps.executeQuery();
@@ -253,10 +333,19 @@ public class LeaseOrderDAO {
 
                 result.add(leaseOrder);
             }
-            ps.close();
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }

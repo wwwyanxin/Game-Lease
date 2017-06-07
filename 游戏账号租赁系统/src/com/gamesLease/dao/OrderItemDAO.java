@@ -1,6 +1,7 @@
 package com.gamesLease.dao;
 
 import com.gamesLease.bean.OrderItem;
+import com.gamesLease.db.DBPool;
 import com.gamesLease.db.DBUtil;
 
 import java.sql.*;
@@ -12,11 +13,13 @@ import java.util.List;
  */
 public class OrderItemDAO {
     public boolean addOrderItem(OrderItem orderItem) {
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "insert into orderitem (lease_id,uid,end,cost) values(?,?,?,?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, orderItem.getLeaseId());
             ps.setInt(2, orderItem.getUid());
             ps.setTimestamp(3, new Timestamp(orderItem.getEnd().getTime()));
@@ -27,22 +30,33 @@ public class OrderItemDAO {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 orderItem.setId(rs.getInt(1));
-                ps.close();
-                conn.close();
                 return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }
 
     public List<OrderItem> queryOrderItemByUid(Integer uid) {
         List<OrderItem> result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "select * from orderitem where uid=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, uid);
 
             ResultSet rs=ps.executeQuery();
@@ -60,10 +74,19 @@ public class OrderItemDAO {
 
                 result.add(orderItem);
             }
-            ps.close();
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return result;
@@ -71,10 +94,12 @@ public class OrderItemDAO {
 
     public List<OrderItem> queryOrderItem() {
         List<OrderItem> result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "select * from orderitem ";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
 
             ResultSet rs=ps.executeQuery();
             result = new ArrayList<>();
@@ -91,10 +116,19 @@ public class OrderItemDAO {
 
                 result.add(orderItem);
             }
-            ps.close();
-            conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return result;
@@ -102,11 +136,13 @@ public class OrderItemDAO {
 
     public OrderItem getOrderItem(Integer id) {
         OrderItem result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn=new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from where id=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
 
             ResultSet rs=ps.executeQuery();
@@ -121,12 +157,21 @@ public class OrderItemDAO {
                 result.setStatus(rs.getInt("status"));
 
             }
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return  result;

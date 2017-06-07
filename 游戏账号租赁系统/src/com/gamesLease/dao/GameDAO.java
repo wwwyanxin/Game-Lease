@@ -1,6 +1,7 @@
 package com.gamesLease.dao;
 
 import com.gamesLease.bean.Game;
+import com.gamesLease.db.DBPool;
 import com.gamesLease.db.DBUtil;
 
 import java.sql.Connection;
@@ -16,11 +17,13 @@ import java.util.List;
 public class GameDAO {
     public Game getGame(String name) {
         Game result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn = new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from game where name = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -28,23 +31,34 @@ public class GameDAO {
                 result.setId(rs.getInt("id"));
                 result.setName(rs.getString("name"));
             }
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
 
     public Game getGameById(Integer id) {
         Game result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try{
-            Connection conn = new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from game where id = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -52,23 +66,34 @@ public class GameDAO {
                 result.setId(rs.getInt("id"));
                 result.setName(rs.getString("name"));
             }
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
 
     public List<Game> queryGame() {
         List<Game> result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try {
-            Connection conn = new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from game ";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             result=new ArrayList<>();
@@ -79,23 +104,34 @@ public class GameDAO {
                 game.setName(rs.getString("name"));
                 result.add(game);
             }
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
 
     public List<Game> queryGame(String name) {//模糊查找
         List<Game> result=null;
+        Connection conn=null;
+        PreparedStatement ps=null;
         try {
-            Connection conn = new DBUtil().getConncetion();
+            conn= DBPool.getConnection();
             String sql = "" +
                     "select * from game like %?% ";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
 
@@ -106,12 +142,21 @@ public class GameDAO {
                 game.setName(rs.getString("name"));
                 result.add(game);
             }
-            ps.close();
-            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }

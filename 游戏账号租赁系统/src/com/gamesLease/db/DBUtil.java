@@ -8,7 +8,8 @@ import java.sql.SQLException;
  * Created by wyx11 on 2017-5-14.
  */
 public class DBUtil {
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/games_lease?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/games_lease?useSSL=false";
+    //private static final String URL = "jdbc:mysql://47.93.243.224:3306/games_lease?useSSL=false";
     private static final String USER = "root";
     private static final String PASSWORD = "1230.+";
 
