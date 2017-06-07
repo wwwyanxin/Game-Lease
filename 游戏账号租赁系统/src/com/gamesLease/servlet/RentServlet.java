@@ -22,6 +22,9 @@ public class RentServlet extends HttpServlet {
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        }else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");//("yyyy-MM-dd'T'HH:mm");//("yyyy-MM-dd'T'HH:mm");

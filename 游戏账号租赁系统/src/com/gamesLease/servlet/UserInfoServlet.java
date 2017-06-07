@@ -1,6 +1,7 @@
 package com.gamesLease.servlet;
 
 import com.gamesLease.bean.*;
+import com.gamesLease.dao.UserDAO;
 import com.gamesLease.service.UserInfoService;
 
 import javax.servlet.ServletException;
@@ -25,9 +26,12 @@ public class UserInfoServlet extends HttpServlet {
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        }else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
-            List<Map<String,Object>> leaseMapList=new UserInfoService().getLeaseMapList(user);
+        List<Map<String,Object>> leaseMapList=new UserInfoService().getLeaseMapList(user);
             List<Map<String,Object>> rentMapList=new UserInfoService().getRentMapList(user);
 
             request.setAttribute("leaseMapList",leaseMapList);

@@ -1,6 +1,7 @@
 package com.gamesLease.servlet;
 
 import com.gamesLease.bean.User;
+import com.gamesLease.dao.UserDAO;
 import com.gamesLease.service.LeaseOrderService;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,9 @@ public class CartServlet extends HttpServlet {
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        }else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
         Integer leaseId=Integer.valueOf(request.getParameter("leaseId"));

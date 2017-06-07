@@ -3,6 +3,7 @@ package com.gamesLease.servlet;
 import com.gamesLease.bean.Game;
 import com.gamesLease.bean.User;
 import com.gamesLease.dao.GameDAO;
+import com.gamesLease.dao.UserDAO;
 import com.gamesLease.service.LeaseOrderService;
 
 import javax.servlet.ServletException;
@@ -22,6 +23,9 @@ public class RentListServlet extends HttpServlet {
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        }else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
         request.setCharacterEncoding("utf-8");
@@ -43,6 +47,9 @@ public class RentListServlet extends HttpServlet {
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        }else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
 

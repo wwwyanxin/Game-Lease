@@ -7,6 +7,7 @@ import com.gamesLease.bean.User;
 import com.gamesLease.dao.AccountInfoDAO;
 import com.gamesLease.dao.GameDAO;
 import com.gamesLease.dao.LeaseOrderDAO;
+import com.gamesLease.dao.UserDAO;
 import com.gamesLease.service.CreateLeaseService;
 
 import javax.servlet.ServletException;
@@ -35,6 +36,9 @@ public class LeaseServlet extends HttpServlet {
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        }else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
         request.setCharacterEncoding("utf-8");
@@ -79,10 +83,13 @@ public class LeaseServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User)request.getSession().getAttribute("user");
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        } else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
 

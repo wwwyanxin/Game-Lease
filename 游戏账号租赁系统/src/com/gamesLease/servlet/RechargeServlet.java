@@ -18,6 +18,9 @@ public class RechargeServlet extends HttpServlet {
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        }else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
         String platform = request.getParameter("platform");
@@ -38,6 +41,9 @@ public class RechargeServlet extends HttpServlet {
         if (null == user) {
             response.sendRedirect("login.jsp");
             return;
+        }else {
+            user = new UserDAO().getUserById(user.getId());
+            request.getSession().setAttribute("user", user);
         }
 
         response.sendRedirect("/gamesLease/recharge.jsp");
