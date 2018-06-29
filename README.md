@@ -1,4 +1,4 @@
-# JAVA
+#游戏账号租赁系统
 servlet+jsp+jdbc  
 
 大二软件工程综合设计作业,基于servlet+jsp+jdbc   没有使用框架,前端用了html+css和一点js代码
